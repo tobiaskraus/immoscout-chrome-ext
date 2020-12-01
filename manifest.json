@@ -1,0 +1,29 @@
+{
+    "manifest_version": 2,
+    "name": "ImmoScout24 Scraper",
+    "version": "1.0.0",
+    "permissions": ["tabs", "activeTab", "storage"],
+    "content_scripts": [
+        {
+            "js": ["contentscript.js"],
+            "css": ["contentscript.css"],
+            "matches": ["<all_urls>"]
+        }
+    ],
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "browser_action": {
+        "default_popup": "popup/index.html",
+        "default_title": "ImmoScout24 Scraper",
+        "default_icon": {
+            "16": "popup/favicon.png",
+            "32": "popup/logo32.png",
+            "64": "popup/logo64.png",
+            "128": "popup/logo128.png"
+        }
+    },
+    "web_accessible_resources": ["assets/*"],
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

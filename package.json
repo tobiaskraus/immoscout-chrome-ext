@@ -1,0 +1,41 @@
+{
+  "name": "tk-immoscout-chrome-ext",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:contentscript-background": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "build:popup": "cross-env INLINE_RUNTIME_CHUNK=false npm run build --prefix src/popup && cd src/popup/build && cpy * static/**/* ../../../dist/popup && cpy  static/**/* ../../../dist --parents",
+    "build": "npm-run-all build:*",
+    "watch:contentscript-background": "cross-env NODE_ENV=development webpack --config webpack.config.js -w",
+    "watch:popup": "npm run watch:build --prefix src/popup",
+    "watch": "npm-run-all --parallel watch:*",
+    "clean": "rm -rf dist && cpy manifest.json dist && cpy src/assets/* dist/assets",
+    "prebuild": "npm run clean",
+    "prewatch": "npm run clean"
+  },
+  "keywords": [],
+  "author": "Tobias Kraus <contact@tobias-kraus.com> (www.tobias-kraus.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chrome": "0.0.126",
+    "@types/jquery": "^3.5.4",
+    "@types/node": "^14.14.6",
+    "awesome-typescript-loader": "^5.2.1",
+    "cpy-cli": "^3.1.1",
+    "cra-build-watch": "^3.4.0",
+    "cross-env": "^7.0.2",
+    "css-loader": "^5.0.0",
+    "mini-css-extract-plugin": "^1.2.1",
+    "node-sass": "^4.14.1",
+    "npm-run-all": "^4.1.5",
+    "sass-loader": "^10.0.4",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.5",
+    "webpack": "4.44.2",
+    "webpack-cli": "^4.1.0"
+  },
+  "dependencies": {
+    "jquery": "^3.5.1"
+  }
+}

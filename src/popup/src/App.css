@@ -1,0 +1,73 @@
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: var(--primary-color);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+}
+.App-header > h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.App-content {
+    padding: 20px 10px;
+}
+
+.App-btn {
+    cursor: pointer;
+    background-color: var(--primary-color);
+    padding: 9px 0;
+    border-radius: 8px;
+    color: var(--text-color);
+    border: none;
+    outline: none;
+    width: 100%;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 0.5em;
+}
+.App-btn[disabled] {
+    background-color: var(--gray-light-color);
+    color: var(--gray-color);
+    cursor: default;
+}
+
+.App-scrape-result {
+    text-align: left;
+}
+.App-scrape-result > p {
+    margin: 10px 0;
+    display: flex;
+}
+.App-key {
+    flex: 0 0 auto;
+    min-width: 8em;
+    font-weight: 600;
+    padding-right: 1.5em;
+}
+.App-value {
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.App-error {
+    background: #fa4e79;
+    padding: 1em 0.5em;
+}
