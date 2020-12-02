@@ -4,6 +4,7 @@ Chrome Extension of ImmoScout project (scrape, see results and organize them)
 
 ## Getting started
 
+- copy `src/popup/.env-example` into new files: `.env` & `.env.production` (git ignored) and update values accordingly
 - `npm i` (install dependencies)
 - `cd src/popup && npm i` (install dependencies of Popup (React App))
 - `cd ..` (go back)
