@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { Message, ScrapeResponse } from "./messages";
 import "./App.css";
-import { saveExpose } from "./requests/requests";
+import { saveProperty } from "./requests/requests";
 
 function App() {
   const [scrapeResult, setScrapeResult] = useState<ScrapeResponse>();
@@ -28,15 +28,15 @@ function App() {
       return;
     }
     setWaiting(true);
-    saveExpose(scrapeResult)
+    saveProperty(scrapeResult)
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
         setScrapeResult(undefined);
         setWaiting(false);
       })
-      .catch((error) => {
-        console.error(error);
-        setError(error);
+      .catch((error: Error) => {
+        console.error(error.message);
+        setError(`saveProperty request: ${error.message}`);
         setWaiting(false);
       });
   }, [scrapeResult]);
@@ -44,7 +44,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src="logo64.png" />
+        <img src="logo64.png" alt="" />
         <h1>Scraper</h1>
       </header>
       <div className="App-content">
@@ -70,7 +70,7 @@ function App() {
         <div className="App-scrape-result">
           {scrapeResult &&
             Object.entries(scrapeResult).map((entry) => (
-              <p>
+              <p key={entry[0]}>
                 <span className="App-key">{entry[0]}</span>
                 <span className="App-value">{entry[1]}</span>
               </p>
