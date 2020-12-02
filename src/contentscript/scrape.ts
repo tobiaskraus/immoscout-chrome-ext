@@ -1,4 +1,5 @@
 import * as $ from "jquery";
+import { Property } from "../models/property";
 
 export function scrape() {
     // retrieve real image URLs from `<img data-default="">` attributes
@@ -6,7 +7,7 @@ export function scrape() {
         .map((i, el) => $(el).attr("data-default") || $(el).attr("data-src"))
         .get();
 
-    const result = {
+    const result: Property = {
         title: $("h1#expose-title").first().text(),
         scout_id: $(".is24-scoutid__content")
             .first()
