@@ -1,5 +1,6 @@
 import * as $ from "jquery";
 import { Property } from "../models/property";
+import { ScrapeResponse } from "../messages/messages";
 
 export function scrape() {
     // retrieve real image URLs from `<img data-default="">` attributes
@@ -7,7 +8,7 @@ export function scrape() {
         .map((i, el) => $(el).attr("data-default") || $(el).attr("data-src"))
         .get();
 
-    const result: Property = {
+    const result: Partial<Property> = {
         title: $("h1#expose-title").first().text(),
         scout_id: $(".is24-scoutid__content")
             .first()
@@ -63,5 +64,5 @@ export function scrape() {
             .map((i, el) => $(el).text())
             .get()[8],
     };
-    return result;
+    return result as ScrapeResponse;
 }
