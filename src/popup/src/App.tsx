@@ -6,6 +6,7 @@ import { saveProperty } from "./requests/requests";
 function App() {
   const [scrapeResult, setScrapeResult] = useState<ScrapeResponse>();
   const [waiting, setWaiting] = useState(false);
+  const [useLocalApi, setUseLocalApi] = useState(false);
   const [error, setError] = useState("");
 
   const onScrapeClick = useCallback(() => {
@@ -28,7 +29,7 @@ function App() {
       return;
     }
     setWaiting(true);
-    saveProperty(scrapeResult)
+    saveProperty(scrapeResult, useLocalApi)
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
         setScrapeResult(undefined);
@@ -47,6 +48,12 @@ function App() {
         <img src="logo64.png" alt="" />
         <h1>Scraper</h1>
       </header>
+      <div>
+          <label htmlFor="useLocalApi">
+              <input type="checkbox" name="useLocalApi" id="useLocalApi" value={useLocalApi} onChange={(e) => setUseLocalApi(e.target.value)}/>
+              local API
+          </label>
+      </div>
       <div className="App-content">
         <button
           type="button"
