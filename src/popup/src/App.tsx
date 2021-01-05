@@ -8,6 +8,7 @@ function App() {
     const [waiting, setWaiting] = useState(false);
     const [useLocalApi, setUseLocalApi] = useState(false);
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
     const onScrapeClick = useCallback(() => {
         setWaiting(true);
@@ -33,10 +34,13 @@ function App() {
             .then((response) => {
                 if (!response.ok) throw Error(response.statusText);
                 setScrapeResult(undefined);
+                setError("");
+                setSuccess("saved successfull.");
                 setWaiting(false);
             })
             .catch((error: Error) => {
                 console.error(error.message);
+                setSuccess("");
                 setError(`saveProperty request: ${error.message}`);
                 setWaiting(false);
             });
@@ -86,6 +90,7 @@ function App() {
                     </button>
                 )}
                 {error && <div className="App-error">{error}</div>}
+                {success && <div className="App-success">{success}</div>}
                 <div className="App-scrape-result">
                     {scrapeResult &&
                         Object.entries(scrapeResult).map((entry) => (
