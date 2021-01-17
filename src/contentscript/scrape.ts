@@ -2,6 +2,7 @@ import * as $ from "jquery";
 import { Property } from "../models/property";
 import { Image } from "../models/Image";
 import { ScrapeResponse } from "../messages/messages";
+import { parsePrice } from "../utils/parse";
 
 export function scrape() {
     const images = $("img.sp-image")
@@ -26,15 +27,19 @@ export function scrape() {
         city_region: $('span[data-qa="is24-expose-address"] .address-block .zip-region-and-country')
             .first()
             .text(),
-        price_net: $(".is24-preis-value").first().text(),
-        price_total: $(".is24qa-gesamtmiete").first().text(),
-        price_additional: $(".is24qa-nebenkosten").first().text(),
-        price_heating: $(".is24qa-heizkosten").first().text(),
-        price_deposit: $(".is24qa-kaution-o-genossenschaftsanteile").first().text(),
+        price_net: parsePrice($(".is24-preis-value").first().text()),
+        price_total: parsePrice($(".is24qa-gesamtmiete").first().text()),
+        price_additional: parsePrice($(".is24qa-nebenkosten").first().text()),
+        price_heating: parsePrice($(".is24qa-heizkosten").first().text()),
+        price_deposit: parsePrice($(".is24qa-kaution-o-genossenschaftsanteile").first().text()),
         vacant_from: $(".is24qa-bezugsfrei-ab").first().text(),
         sqm: $(".is24qa-flaeche, .is24qa-flaeche-ca").first().text(),
         sqm_nutzflaeche: $(".is24qa-nutzflaeche, .is24qa-nutzflaeche-ca").first().text(),
         sqm_wohnflaeche: $(".is24qa-wohnflaeche, .is24qa-wohnflaeche-ca").first().text(),
+        /** labels under the price section */
+        features: $(".criteriagroup.boolean-listing > :not(.palm-hide)")
+            .map((i, d) => $(d).text())
+            .get(),
         images,
         construction_year: $(".is24qa-baujahr").first().text(),
         object_condition: $(".is24qa-objektzustand").first().text(),

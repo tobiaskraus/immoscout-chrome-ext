@@ -1,19 +1,23 @@
 import { Image } from "./Image";
 
+/**
+ * - all prices in EUR
+ */
 export interface Property {
     title: string;
     scout_id: string;
     street: string;
     city_region: string;
-    price_net: string;
-    price_total: string;
-    price_additional: string;
-    price_heating: string;
-    price_deposit: string;
+    price_net: number;
+    price_total: number;
+    price_additional: number;
+    price_heating: number;
+    price_deposit: number;
     vacant_from: string;
     sqm: string;
     sqm_nutzflaeche: string;
     sqm_wohnflaeche: string;
+    features: string[];
     /** urls */
     images: Image[];
     construction_year: string;
