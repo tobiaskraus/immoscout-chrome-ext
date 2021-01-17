@@ -20,6 +20,8 @@ export interface Property {
     features: string[];
     /** urls */
     images: Image[];
+    floor: number;
+    floorTotal: number;
     construction_year: string;
     object_condition: string;
     heating_type: string;
