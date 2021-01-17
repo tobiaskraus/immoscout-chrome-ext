@@ -1,11 +1,17 @@
 import * as $ from "jquery";
 import { Property } from "../models/property";
+import { Image } from "../models/Image";
 import { ScrapeResponse } from "../messages/messages";
 
 export function scrape() {
-    // retrieve real image URLs from `<img data-default="">` attributes
-    const imageUrls = $("img.sp-image")
-        .map((i, el) => $(el).attr("data-default") || $(el).attr("data-src"))
+    const images = $("img.sp-image")
+        .map((i, el) => {
+            const image: Image = {
+                urlSecondary: $(el).attr("data-default") || $(el).attr("data-src"),
+                text: $(el).attr("data-caption"),
+            };
+            return image;
+        })
         .get();
 
     const result: Partial<Property> = {
@@ -29,7 +35,7 @@ export function scrape() {
         sqm: $(".is24qa-flaeche, .is24qa-flaeche-ca").first().text(),
         sqm_nutzflaeche: $(".is24qa-nutzflaeche, .is24qa-nutzflaeche-ca").first().text(),
         sqm_wohnflaeche: $(".is24qa-wohnflaeche, .is24qa-wohnflaeche-ca").first().text(),
-        images: imageUrls,
+        images,
         construction_year: $(".is24qa-baujahr").first().text(),
         object_condition: $(".is24qa-objektzustand").first().text(),
         heating_type: $(".is24qa-heizungsart").first().text(),

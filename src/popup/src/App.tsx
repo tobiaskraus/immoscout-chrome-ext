@@ -96,7 +96,7 @@ function App() {
                         Object.entries(scrapeResult).map((entry) => (
                             <p key={entry[0]}>
                                 <span className="App-key">{entry[0]}</span>
-                                <span className="App-value">{entry[1]}</span>
+                                <span className="App-value">{JSON.stringify(entry[1])}</span>
                             </p>
                         ))}
                 </div>
