@@ -7,7 +7,7 @@
         {
             "js": ["contentscript.js"],
             "css": ["contentscript.css"],
-            "matches": ["<all_urls>"]
+            "matches": ["*://*.immobilienscout24.de/*"]
         }
     ],
     "browser_action": {
