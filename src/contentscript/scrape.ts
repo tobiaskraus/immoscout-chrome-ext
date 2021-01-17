@@ -2,13 +2,13 @@ import * as $ from "jquery";
 import { Property } from "../models/property";
 import { Image } from "../models/Image";
 import { ScrapeResponse } from "../messages/messages";
-import { parsePrice } from "../utils/parse";
+import { parseFloor, parsePrice } from "../utils/parse";
 
 export function scrape() {
     const images = $("img.sp-image")
         .map((i, el) => {
             const image: Image = {
-                urlSecondary: $(el).attr("data-default") || $(el).attr("data-src"),
+                url: $(el).attr("data-default") || $(el).attr("data-src"),
                 text: $(el).attr("data-caption"),
             };
             return image;
@@ -41,6 +41,8 @@ export function scrape() {
             .map((i, d) => $(d).text())
             .get(),
         images,
+        floor: parseFloor($(".is24qa-etage").text().trim()).floor,
+        floorTotal: parseFloor($(".is24qa-etage").text().trim()).floorTotal,
         construction_year: $(".is24qa-baujahr").first().text(),
         object_condition: $(".is24qa-objektzustand").first().text(),
         heating_type: $(".is24qa-heizungsart").first().text(),
